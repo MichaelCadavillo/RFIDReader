@@ -196,6 +196,7 @@ public class TagViewerIn extends Activity {
 
     private String dumpTagData(Tag tag) {
         byte[] id = tag.getId();
+        int stationID = 00;
 
         //get current date
         long millis = System.currentTimeMillis();
@@ -231,13 +232,15 @@ public class TagViewerIn extends Activity {
             minuteCategory1 = "59";
         }
 
+        String station = getStation(stationID);
+
         //add values to db
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference reference = db.getReference(date.toString()).child(currentHour + ":" + minuteCategory + " - " + currentHour + ":" + minuteCategory1).child("users").child(String.valueOf(toDec(id)));
+        DatabaseReference reference = db.getReference(date.toString()).child("Entry").child(stationID + " - " + station).child(currentHour + ":" + minuteCategory + " - " + currentHour + ":" + minuteCategory1).child("users").child(String.valueOf(toDec(id)));
         //reference.child("userID").setValue(String.valueOf(toDec(id)));
         //reference.child("date").setValue(date.toString());
         reference.child("timeIn").setValue(timeWithSec);
-        reference.child("stationInID").setValue("01");
+        //reference.child("stationInID").setValue(stationID);
 
 
         //play beep sound
@@ -247,6 +250,78 @@ public class TagViewerIn extends Activity {
         Toast.makeText(TagViewerIn.this, "Beep Card Tapped! ID: " + String.valueOf(toDec(id)), Toast.LENGTH_LONG).show();
 
         return String.valueOf(toDec(id));
+    }
+
+    private String getStation(int stationID){
+        //stations
+
+        String station = "";
+        switch (stationID){
+            case 0:
+                station = "Baclaran";
+                break;
+            case 1:
+                station = "EDSA";
+                break;
+            case 2:
+                station = "Libertad";
+                break;
+            case 3:
+                station = "Gil Puyat";
+                break;
+            case 4:
+                station = "Vito Cruz";
+                break;
+            case 5:
+                station = "Quirino Ave";
+                break;
+            case 6:
+                station = "Pedro Gil";
+                break;
+            case 7:
+                station = "United Nations Ave";
+                break;
+            case 8:
+                station = "Central";
+                break;
+            case 9:
+                station = "Carriedo";
+                break;
+            case 10:
+                station = "Doroteo Jose";
+                break;
+            case 11:
+                station = "Bambang";
+                break;
+            case 12:
+                station = "Tayuman";
+                break;
+            case 13:
+                station = "Blumentritt";
+                break;
+            case 14:
+                station = "Abad Santos";
+                break;
+            case 15:
+                station = "R Papa";
+                break;
+            case 16:
+                station = "5th Avenue";
+                break;
+            case 17:
+                station = "Monumento";
+                break;
+            case 18:
+                station = "Balintawak";
+                break;
+            case 19:
+                station = "Roosevelt";
+                break;
+            case 20:
+                station = "North";
+                break;
+        }
+        return station;
     }
 
     private Tag cleanupTag(Tag oTag) {

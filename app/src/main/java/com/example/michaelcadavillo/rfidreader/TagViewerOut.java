@@ -197,6 +197,7 @@ public class TagViewerOut extends Activity {
 
     private String dumpTagData(Tag tag) {
         byte[] id = tag.getId();
+        int stationID = 15;
 
         //get current date
         long millis = System.currentTimeMillis();
@@ -215,23 +216,29 @@ public class TagViewerOut extends Activity {
         int currentMinute = Integer.parseInt(sdf3.format(cal.getTime()));
 
         String minuteCategory = "";
+        String minuteCategory1 = "";
 
         if(currentMinute >= 0 && currentMinute < 15){
-            minuteCategory = "00-14";
+            minuteCategory = "00";
+            minuteCategory1 = "14";
         }else if(currentMinute >= 15 && currentMinute < 30){
-            minuteCategory = "15-29";
+            minuteCategory = "15";
+            minuteCategory1 = "29";
         }else if(currentMinute >= 30 && currentMinute < 45){
-            minuteCategory = "30-44";
+            minuteCategory = "30";
+            minuteCategory1 = "44";
         }else if(currentMinute >= 45 && currentMinute < 60){
-            minuteCategory = "45-59";
+            minuteCategory = "45";
+            minuteCategory1 = "59";
         }
+
+        String station = getStation(stationID);
 
         //add values to db
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference reference = db.getReference(date.toString()).child(currentHour + ":" + minuteCategory).child("users").child(String.valueOf(toDec(id)));
+        DatabaseReference reference = db.getReference(date.toString()).child("Exit").child(stationID + " - " + station).child(currentHour + ":" + minuteCategory + " - " + currentHour + ":" + minuteCategory1).child("users").child(String.valueOf(toDec(id)));
         reference.child("timeOut").setValue(timeWithSec);
-        reference.child("stationOutID").setValue("05");
-
+        //reference.child("stationOutID").setValue("05");
 
         //play beep sound
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.beep);
@@ -240,6 +247,78 @@ public class TagViewerOut extends Activity {
         Toast.makeText(TagViewerOut.this, "Beep Card Tapped! ID: " + String.valueOf(toDec(id)), Toast.LENGTH_LONG).show();
 
         return String.valueOf(toDec(id));
+    }
+
+    private String getStation(int stationID){
+        //stations
+
+        String station = "";
+        switch (stationID){
+            case 0:
+                station = "Baclaran";
+                break;
+            case 1:
+                station = "EDSA";
+                break;
+            case 2:
+                station = "Libertad";
+                break;
+            case 3:
+                station = "Gil Puyat";
+                break;
+            case 4:
+                station = "Vito Cruz";
+                break;
+            case 5:
+                station = "Quirino Ave";
+                break;
+            case 6:
+                station = "Pedro Gil";
+                break;
+            case 7:
+                station = "United Nations Ave";
+                break;
+            case 8:
+                station = "Central";
+                break;
+            case 9:
+                station = "Carriedo";
+                break;
+            case 10:
+                station = "Doroteo Jose";
+                break;
+            case 11:
+                station = "Bambang";
+                break;
+            case 12:
+                station = "Tayuman";
+                break;
+            case 13:
+                station = "Blumentritt";
+                break;
+            case 14:
+                station = "Abad Santos";
+                break;
+            case 15:
+                station = "R Papa";
+                break;
+            case 16:
+                station = "5th Avenue";
+                break;
+            case 17:
+                station = "Monumento";
+                break;
+            case 18:
+                station = "Balintawak";
+                break;
+            case 19:
+                station = "Roosevelt";
+                break;
+            case 20:
+                station = "North";
+                break;
+        }
+        return station;
     }
 
     private Tag cleanupTag(Tag oTag) {
