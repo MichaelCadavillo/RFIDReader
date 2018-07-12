@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "149609366284",
+    "firebase_url": "https://puv-prediction-of-user-volume.firebaseio.com",
+    "project_id": "puv-prediction-of-user-volume",
+    "storage_bucket": "puv-prediction-of-user-volume.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149609366284:android:aa6ae3b5a471a119",
+        "android_client_info": {
+          "package_name": "com.example.michaelcadavillo.rfidreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149609366284-bsqrk96le5d03n0jsj1m6pgfgkg7vci3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.michaelcadavillo.rfidreader",
+            "certificate_hash": "71b3f78d166901a7b2f34fac650a9670f039c356"
+          }
+        },
+        {
+          "client_id": "149609366284-mafimdq3s4gfoe1uf123877plmdck663.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_TapIfa4lqz_J0Cl29VSZkb4tkL_hdz8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149609366284-mafimdq3s4gfoe1uf123877plmdck663.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
